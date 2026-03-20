@@ -319,13 +319,12 @@
 </div>
 
 <script>
-const GALLERIES={
-  vk7:  ['images/verkhnekamenskaya-7/008.jpg','images/verkhnekamenskaya-7/011.jpg','images/verkhnekamenskaya-7/019.jpg','images/verkhnekamenskaya-7/020.jpg'],
-  zp193:['images/zapovedniy-park-193/005.jpg','images/zapovedniy-park-193/008.jpg','images/zapovedniy-park-193/011.jpg','images/zapovedniy-park-193/012.jpg'],
-  zp57: ['images/zapovedniy-park-57/DSCF8141-HDR.jpg','images/zapovedniy-park-57/DSCF8144-HDR.jpg','images/zapovedniy-park-57/DSCF8168-HDR.jpg','images/zapovedniy-park-57/DSCF8174-HDR.jpg'],
-  cn709:['images/chistoe-nebo-709/001.jpg','images/chistoe-nebo-709/003.jpg','images/chistoe-nebo-709/004.jpg','images/chistoe-nebo-709/006.jpg'],
-  pv179:['images/prospekt-veteranov-179/001.jpg','images/prospekt-veteranov-179/003.jpg','images/prospekt-veteranov-179/004.jpg','images/prospekt-veteranov-179/005.jpg'],
-};
+const GALLERIES={};
+document.querySelectorAll('.g-item[data-gallery]').forEach(el=>{
+  const key=el.dataset.gallery,idx=parseInt(el.dataset.index,10);
+  if(!GALLERIES[key])GALLERIES[key]=[];
+  GALLERIES[key][idx]=el.querySelector('img').src;
+});
 const nav=document.getElementById('mainNav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
 const ham=document.getElementById('hamburger'),drawer=document.getElementById('mobileDrawer'),overlay=document.getElementById('drawerOverlay');
