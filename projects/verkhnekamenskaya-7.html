@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Верхне-Каменская 7 — Property by Maria V</title>
+  <style>
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--cream:#faf6f1;--blush:#f2ddd4;--rose:#e8c4b4;--warm:#d4a996;--tan:#c49a87;--caramel:#b07d6a;--sand:#f5ede3;--gold:#c9a97a;--text:#4a3830;--muted:#8a6f65;--white:#fffdf9;--nav-h:70px;font-family:'Georgia','Times New Roman',serif}
+    html{scroll-behavior:smooth}body{background:var(--cream);color:var(--text);overflow-x:hidden}
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--sand)}::-webkit-scrollbar-thumb{background:var(--warm);border-radius:3px}
+    nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(250,246,241,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,154,135,.2);z-index:100;transition:box-shadow .3s}
+    nav.scrolled{box-shadow:0 4px 24px rgba(74,56,48,.08)}
+    .nav-logo{display:flex;flex-direction:column;line-height:1.1;text-decoration:none}
+    .nav-logo .brand{font-size:1.1rem;letter-spacing:.25em;color:var(--text);text-transform:uppercase;font-weight:normal}
+    .nav-logo .sub{font-size:.7rem;letter-spacing:.2em;color:var(--warm);text-transform:uppercase;font-style:italic}
+    .nav-links{display:flex;gap:36px;list-style:none}
+    .nav-links a{text-decoration:none;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);transition:color .3s;position:relative;padding-bottom:4px}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+    .nav-links a:hover{color:var(--text)}.nav-links a:hover::after{width:100%}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+    .nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--text);transition:.3s}
+    .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(74,56,48,.4);z-index:200}
+    .drawer-overlay.open{display:block}
+    .mobile-drawer{position:fixed;top:0;right:-260px;bottom:0;width:240px;background:var(--cream);z-index:201;padding:80px 36px 40px;display:flex;flex-direction:column;gap:28px;transition:right .35s cubic-bezier(.4,0,.2,1);box-shadow:-4px 0 24px rgba(74,56,48,.1)}
+    .mobile-drawer.open{right:0}
+    .drawer-link{text-decoration:none;font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text)}
+    .section-label{font-size:.68rem;letter-spacing:.4em;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+    .section-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:normal;color:var(--text);letter-spacing:.02em}
+    .section-title em{font-style:italic;color:var(--caramel)}
+    .section-rule{width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:20px auto 0}
+    #approach{background:linear-gradient(160deg,var(--sand),var(--blush));padding:100px 0}
+    .approach-inner{max-width:1400px;margin:0 auto;padding:0 48px}
+    .approach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px}
+    .approach-card{background:rgba(250,246,241,.6);padding:48px 40px;position:relative;overflow:hidden;opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s,background .3s}
+    .approach-card.visible{opacity:1;transform:translateY(0)}
+    .approach-card:hover{background:rgba(250,246,241,.95)}
+    .approach-card::before{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .5s}
+    .approach-card:hover::before{transform:scaleX(1)}
+    .approach-icon{font-size:2rem;margin-bottom:20px;display:block}
+    .approach-step{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+    .approach-heading{font-size:1.3rem;font-weight:normal;color:var(--text);margin-bottom:14px}
+    .approach-text{font-size:.88rem;line-height:1.75;color:var(--muted);font-style:italic}
+    #contact{background:var(--text);padding:100px 48px;text-align:center}
+    #contact .section-label{color:var(--rose)}
+    #contact .section-title{color:var(--cream)}
+    #contact .section-title em{color:var(--rose)}
+    #contact .section-rule{background:linear-gradient(90deg,transparent,var(--rose),transparent)}
+    .contact-tagline{font-size:1rem;color:rgba(250,246,241,.55);font-style:italic;margin:28px auto 48px;max-width:500px;line-height:1.7}
+    .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
+    .contact-link{display:inline-flex;align-items:center;gap:10px;padding:14px 36px;border:1px solid rgba(232,196,180,.35);color:var(--rose);text-decoration:none;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;transition:all .4s}
+    .contact-link:hover{background:var(--rose);color:var(--text);border-color:var(--rose)}
+    .contact-footer{margin-top:80px;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,246,241,.25)}
+    .lightbox{position:fixed;inset:0;background:rgba(20,12,8,.96);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s}
+    .lightbox.active{opacity:1;pointer-events:all}
+    .lightbox-img{max-width:88vw;max-height:85vh;object-fit:contain;transform:scale(.9);transition:transform .35s;border:1px solid rgba(196,154,135,.2)}
+    .lightbox.active .lightbox-img{transform:scale(1)}
+    .lightbox-close{position:absolute;top:28px;right:36px;font-size:1.6rem;color:rgba(255,255,255,.55);cursor:pointer;background:none;border:none;line-height:1;transition:color .3s}
+    .lightbox-close:hover{color:var(--rose)}
+    .lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.07);border:1px solid rgba(196,154,135,.2);color:rgba(255,255,255,.7);width:50px;height:50px;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all .3s}
+    .lightbox-prev{left:24px}.lightbox-next{right:24px}
+    .lightbox-prev:hover,.lightbox-next:hover{background:rgba(196,154,135,.3);color:white}
+    .lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:.68rem;letter-spacing:.25em;color:rgba(255,255,255,.4);text-transform:uppercase}
+    @media(max-width:900px){.nav-links{display:none}.nav-hamburger{display:flex}nav{padding:0 24px}#contact{padding:70px 24px}.approach-inner{padding:0 24px}.approach-grid{grid-template-columns:1fr}}
+
+    /* PROJECT HERO */
+    .proj-hero{height:70vh;min-height:480px;display:flex;align-items:flex-end;padding:0 64px 60px;position:relative;overflow:hidden}
+    .proj-hero-bg{position:absolute;inset:0;background:url('../images/verkhnekamenskaya-7/008.jpg') center/cover no-repeat}
+    .proj-hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(20,12,8,.78) 0%,rgba(20,12,8,.22) 65%,transparent 100%)}
+    .proj-hero-content{position:relative;z-index:1}
+    .proj-back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(232,196,180,.8);margin-bottom:20px;transition:color .3s}
+    .proj-back:hover{color:var(--rose)}
+    .proj-hero-eyebrow{font-size:.68rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(232,196,180,.7);margin-bottom:12px}
+    .proj-hero-title{font-size:clamp(2rem,5vw,4rem);font-weight:normal;color:#fffdf9;letter-spacing:.02em;line-height:1.1}
+    /* METRICS */
+    .metrics-bar{background:var(--text);padding:40px 64px}
+    .metrics-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:24px}
+    .metric-item{text-align:center}
+    .metric-label{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(232,196,180,.55);margin-bottom:8px}
+    .metric-value{font-size:1.05rem;color:var(--cream);letter-spacing:.04em}
+    /* GALLERY */
+    .gallery-wrap{max-width:1400px;margin:0 auto;padding:80px 48px}
+    .gallery-header{text-align:center;margin-bottom:48px}
+    .masonry-grid{columns:3;column-gap:10px}
+    .masonry-item{break-inside:avoid;margin-bottom:10px;position:relative;overflow:hidden;cursor:pointer;background:var(--sand)}
+    .masonry-item img{width:100%;height:auto;display:block;transition:transform .6s cubic-bezier(.25,.46,.45,.94),filter .5s}
+    .masonry-item:hover img{transform:scale(1.04);filter:brightness(1.03)}
+    .mi-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(74,56,48,.35),transparent 55%);opacity:0;transition:opacity .4s}
+    .masonry-item:hover .mi-overlay{opacity:1}
+    /* PROJECT NAV */
+    .proj-nav{background:var(--sand);padding:48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+    .proj-nav-back{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+    .proj-nav-back:hover{color:var(--text)}
+    .proj-nav-sides{display:flex;gap:20px}
+    .proj-nav-link{display:inline-flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;padding:12px 24px;border:1px solid rgba(196,154,135,.35);transition:all .35s}
+    .proj-nav-link:hover{background:var(--warm);border-color:var(--warm)}
+    .proj-nav-link:hover *{color:white}
+    .proj-nav-dir{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--warm)}
+    .proj-nav-name{font-size:.78rem;letter-spacing:.08em;color:var(--text)}
+    @media(max-width:900px){.metrics-inner{grid-template-columns:repeat(3,1fr)}.metrics-bar{padding:32px 24px}.proj-hero{padding:0 24px 40px}.gallery-wrap{padding:60px 24px}.masonry-grid{columns:2}}
+    @media(max-width:500px){.metrics-inner{grid-template-columns:repeat(2,1fr)}.masonry-grid{columns:1}.proj-nav{padding:32px 24px;justify-content:center}}
+  </style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="../index.html" class="nav-logo">
+    <span class="brand">Property by Maria V</span>
+    <span class="sub">Apartment Renovation · St. Petersburg</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#projects">Portfolio</a></li>
+    <li><a href="../index.html#approach">Approach</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="../index.html#projects" class="drawer-link">Portfolio</a>
+    <a href="../index.html#approach" class="drawer-link">Approach</a>
+    <a href="../index.html#contact"  class="drawer-link">Contact</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<header class="proj-hero">
+  <div class="proj-hero-bg"></div>
+  <div class="proj-hero-content">
+    <a class="proj-back" href="../index.html">&#8592; Back to Portfolio</a>
+    <p class="proj-hero-eyebrow">Property by Maria V · Saint Petersburg</p>
+    <h1 class="proj-hero-title">Верхне-Каменская 7</h1>
+  </div>
+</header>
+
+<div class="metrics-bar">
+  <div class="metrics-inner">
+    <div class="metric-item"><div class="metric-label">Площадь (м²)</div><div class="metric-value">—</div></div>
+    <div class="metric-item"><div class="metric-label">Высота потолков (м)</div><div class="metric-value">—</div></div>
+    <div class="metric-item"><div class="metric-label">Этаж / всего этажей</div><div class="metric-value">—</div></div>
+    <div class="metric-item"><div class="metric-label">Планировка</div><div class="metric-value">—</div></div>
+    <div class="metric-item"><div class="metric-label">Срок ремонта</div><div class="metric-value">—</div></div>
+    <div class="metric-item"><div class="metric-label">Год завершения</div><div class="metric-value">—</div></div>
+  </div>
+</div>
+
+<div class="gallery-wrap">
+  <div class="gallery-header">
+    <div class="section-label">Full Gallery</div>
+    <h2 class="section-title">Верхне-Каменская 7 <em>— все фото</em></h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="masonry-grid" id="masonryGrid">
+<div class="masonry-item" data-idx="0"><img src="../images/verkhnekamenskaya-7/008.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="1"><img src="../images/verkhnekamenskaya-7/011.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="2"><img src="../images/verkhnekamenskaya-7/019.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="3"><img src="../images/verkhnekamenskaya-7/020.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="4"><img src="../images/verkhnekamenskaya-7/021.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="5"><img src="../images/verkhnekamenskaya-7/022.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="6"><img src="../images/verkhnekamenskaya-7/023.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="7"><img src="../images/verkhnekamenskaya-7/024.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="8"><img src="../images/verkhnekamenskaya-7/025.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="9"><img src="../images/verkhnekamenskaya-7/026.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="10"><img src="../images/verkhnekamenskaya-7/028.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="11"><img src="../images/verkhnekamenskaya-7/029.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="12"><img src="../images/verkhnekamenskaya-7/030.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="13"><img src="../images/verkhnekamenskaya-7/031.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="14"><img src="../images/verkhnekamenskaya-7/035.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="15"><img src="../images/verkhnekamenskaya-7/037.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="16"><img src="../images/verkhnekamenskaya-7/041.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="17"><img src="../images/verkhnekamenskaya-7/044.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="18"><img src="../images/verkhnekamenskaya-7/047.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="19"><img src="../images/verkhnekamenskaya-7/049.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="20"><img src="../images/verkhnekamenskaya-7/054.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="21"><img src="../images/verkhnekamenskaya-7/057.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="22"><img src="../images/verkhnekamenskaya-7/062.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="23"><img src="../images/verkhnekamenskaya-7/064.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="24"><img src="../images/verkhnekamenskaya-7/066.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+<div class="masonry-item" data-idx="25"><img src="../images/verkhnekamenskaya-7/069.jpg" alt="" loading="lazy"/><div class="mi-overlay"></div></div>
+
+  </div>
+</div>
+
+<nav class="proj-nav">
+  <a class="proj-nav-back" href="../index.html">&#8592; Back to Portfolio</a>
+  <div class="proj-nav-sides">
+    <a class="proj-nav-link" href="prospekt-veteranov-179.html">
+      <span class="proj-nav-dir">&#8592; Previous</span>
+      <span class="proj-nav-name">Проспект Ветеранов 179</span>
+    </a>
+    <a class="proj-nav-link" href="zapovedniy-park-193.html">
+      <span class="proj-nav-dir">Next &#8594;</span>
+      <span class="proj-nav-name">ЖК Заповедный Парк 193</span>
+    </a>
+  </div>
+</nav>
+
+
+<section id="approach">
+  <div class="approach-inner">
+    <div style="text-align:center;margin-bottom:70px">
+      <div class="section-label">The Process</div>
+      <h2 class="section-title">How We <em>Work</em></h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-card"><span class="approach-icon">&#9998;</span><div class="approach-step">Step 01</div><h3 class="approach-heading">Concept &amp; Vision</h3><p class="approach-text">Every project begins with listening. We immerse ourselves in the space — its light, proportions and potential — to craft a vision that is unique and sellable.</p></div>
+      <div class="approach-card" style="transition-delay:.15s"><span class="approach-icon">&#9670;</span><div class="approach-step">Step 02</div><h3 class="approach-heading">Curated Execution</h3><p class="approach-text">We work exclusively with trusted artisans and suppliers. Every material, fitting and finish is chosen for its quality and contribution to the whole.</p></div>
+      <div class="approach-card" style="transition-delay:.3s"><span class="approach-icon">&#10022;</span><div class="approach-step">Step 03</div><h3 class="approach-heading">Staged &amp; Sold</h3><p class="approach-text">Professional staging and photography present the apartment at its absolute best — maximising buyer impact and achieving premium resale values consistently.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Get in Touch</div>
+  <h2 class="section-title">Start a <em>Conversation</em></h2>
+  <div class="section-rule"></div>
+  <p class="contact-tagline">Interested in partnering or investing? We would love to hear from you.</p>
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:info@propertybymariv.ru">&#9993;&nbsp; info@propertybymariv.ru</a>
+    <a class="contact-link" href="tel:+79001234567">&#9742;&nbsp; +7 900 123 45 67</a>
+    <a class="contact-link" href="https://t.me/propertybymariv" target="_blank">&#8962;&nbsp; Telegram</a>
+  </div>
+  <p class="contact-footer">&#169; 2025 Property by Maria V — Saint Petersburg</p>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">&#215;</button>
+  <button class="lightbox-prev" id="lbPrev">&#8592;</button>
+  <img class="lightbox-img" id="lbImg" src="" alt=""/>
+  <button class="lightbox-next" id="lbNext">&#8594;</button>
+  <div class="lightbox-counter" id="lbCounter"></div>
+</div>
+
+<script>
+  const ALL_IMGS = ['../images/verkhnekamenskaya-7/008.jpg','../images/verkhnekamenskaya-7/011.jpg','../images/verkhnekamenskaya-7/019.jpg','../images/verkhnekamenskaya-7/020.jpg','../images/verkhnekamenskaya-7/021.jpg','../images/verkhnekamenskaya-7/022.jpg','../images/verkhnekamenskaya-7/023.jpg','../images/verkhnekamenskaya-7/024.jpg','../images/verkhnekamenskaya-7/025.jpg','../images/verkhnekamenskaya-7/026.jpg','../images/verkhnekamenskaya-7/028.jpg','../images/verkhnekamenskaya-7/029.jpg','../images/verkhnekamenskaya-7/030.jpg','../images/verkhnekamenskaya-7/031.jpg','../images/verkhnekamenskaya-7/035.jpg','../images/verkhnekamenskaya-7/037.jpg','../images/verkhnekamenskaya-7/041.jpg','../images/verkhnekamenskaya-7/044.jpg','../images/verkhnekamenskaya-7/047.jpg','../images/verkhnekamenskaya-7/049.jpg','../images/verkhnekamenskaya-7/054.jpg','../images/verkhnekamenskaya-7/057.jpg','../images/verkhnekamenskaya-7/062.jpg','../images/verkhnekamenskaya-7/064.jpg','../images/verkhnekamenskaya-7/066.jpg','../images/verkhnekamenskaya-7/069.jpg'];
+
+  const nav=document.getElementById('mainNav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+  const ham=document.getElementById('hamburger'),drawer=document.getElementById('mobileDrawer'),overlay=document.getElementById('drawerOverlay');
+  function closeDrawer(){drawer.classList.remove('open');overlay.classList.remove('open');}
+  ham.addEventListener('click',()=>{drawer.classList.toggle('open');overlay.classList.toggle('open');});
+  overlay.addEventListener('click',closeDrawer);
+  drawer.querySelectorAll('.drawer-link').forEach(l=>l.addEventListener('click',closeDrawer));
+  const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.approach-card,.fade-in').forEach(el=>io.observe(el));
+  const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCounter=document.getElementById('lbCounter');
+  let lbImages=[],lbIdx=0;
+  function openLightbox(imgs,idx){lbImages=imgs;lbIdx=idx;showLb();lb.classList.add('active');document.body.style.overflow='hidden';}
+  function closeLightbox(){lb.classList.remove('active');document.body.style.overflow='';}
+  function showLb(){lbImg.src=lbImages[lbIdx];lbCounter.textContent=(lbIdx+1)+' / '+lbImages.length;}
+  function prevLb(){lbIdx=(lbIdx-1+lbImages.length)%lbImages.length;showLb();}
+  function nextLb(){lbIdx=(lbIdx+1)%lbImages.length;showLb();}
+  document.getElementById('lbClose').addEventListener('click',closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click',prevLb);
+  document.getElementById('lbNext').addEventListener('click',nextLb);
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLightbox();});
+  document.addEventListener('keydown',e=>{if(!lb.classList.contains('active'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')prevLb();if(e.key==='ArrowRight')nextLb();});
+  let tsX=0;
+  lb.addEventListener('touchstart',e=>{tsX=e.changedTouches[0].clientX;},{passive:true});
+  lb.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tsX;if(Math.abs(dx)>50)dx<0?nextLb():prevLb();},{passive:true});
+
+  document.querySelectorAll('.masonry-item').forEach(el=>{
+    el.addEventListener('click',()=>openLightbox(ALL_IMGS, parseInt(el.dataset.idx,10)));
+  });
+</script>
+</body>
+</html>
